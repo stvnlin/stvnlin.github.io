@@ -41,41 +41,44 @@ function draw() {
     text(hearts[i].symbol, hearts[i].x + heartSize / 2, hearts[i].y + heartSize / 2);
   }
 
-
-  if(isHappy == true){
+  if(isHappy){
     scale(0.8);
     image(happyIMG, width/2 - 50, height/2 - 50);
-
-    if(frameCount - switchFrame > happyDuration){
-      isHappy = false;
-    }
-  } else if(clickCount >= 7){
-    isHappy = true;
-    scale(0.8);
-    image(happyIMG, width/2 - 50, height/2 - 50);
-    //console.log("okk");
-
-  } else{
+  }
+  else{
     scale(0.8);
     image(defaultIMG, width/2 - 50, height/2 - 50);
   }
 
   textSize(32);
   textAlign(CENTER);
-  text('CLICK TO CHARGE', width/2 - 50, height/2 + 50);
+  if(isHappy){
+    text('CLICK TO GO', width/2 - 50, height/2 + 50);
+  }else{
+    text('CLICK TO CHARGE', width/2 - 50, height/2 + 50);
+  }
 }
 
 function mousePressed() {
   if (mouseX >= width / 2 - 50 && mouseX <= width / 2 + 50 &&
     mouseY >= height / 2 - 50 && mouseY <= height / 2 + 50) {
+      if(isHappy)
+        window.location.href="../GamePage";
+
       clickSound.play();
 
-      for (let i=0; i<45, i++;){
-        hearts[i+clickCount*15] = heartSymbols[int(random(heartSymbols.length))];
-      }
+      if(clickCount < 10){
+        for (let i=0; i<45, i++;){
+          hearts[i+clickCount*15] = heartSymbols[int(random(heartSymbols.length))];
+        }
 
-      clickCount++;
-    }
+        clickCount++;
+      }else {
+        isHappy = true;
+      }
+  }elsea{
+      failSound.play();
+  }
 }
 
 // function mousePressed() {
