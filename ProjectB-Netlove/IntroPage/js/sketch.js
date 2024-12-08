@@ -13,10 +13,10 @@ let failSound;
 let clickSound;
 
 function preload(){
-  defaultIMG = loadImage("default.png");  // load image
-  happyIMG = loadImage("happy.png");
-  failSound = loadSound("introbackground.wav");
-  clickSound = loadSound("introclicking.wav");
+  defaultIMG = loadImage("../assets/default.png");  // load image
+  happyIMG = loadImage("../assets/happy.png");
+  failSound = loadSound("../sound/introbackground.wav");
+  clickSound = loadSound("../sound/introclicking.wav");
 }
 
 function setup() {
@@ -59,43 +59,60 @@ function draw() {
     scale(0.8);
     image(defaultIMG, width/2 - 50, height/2 - 50);
   }
+
+  textSize(32);
+  textAlign(CENTER);
+  text('CLICK TO CHARGE', width/2 - 50, height/2 + 50);
 }
 
 function mousePressed() {
   if (mouseX >= width / 2 - 50 && mouseX <= width / 2 + 50 &&
     mouseY >= height / 2 - 50 && mouseY <= height / 2 + 50) {
-    clickSound.play();
-    let changedCount = 0;
-    let randomHearts = []; 
-  
-  for (let i = 0; i < hearts.length; i++) {
-    if (hearts[i].symbol === "♡") {
-      randomHearts.push(hearts[i]);
+      clickSound.play();
+
+      for (let i=0; i<45, i++;){
+        hearts[i+clickCount*15] = heartSymbols[int(random(heartSymbols.length))];
+      }
+
+      clickCount++;
     }
-  }
-  
-  while (changedCount < 100 && randomHearts.length > 0) {
-    let randHeart = randomHearts[int(random(randomHearts.length))]; 
-    randHeart.symbol = heartSymbols[int(random(heartSymbols.length))];  
-    changedCount++;
-  }
-  clickCount++;
-
-  if(clickCount >= 8){
-
-    window.location.href="../GamePage";
-
-    // isHappy = true;
-    // scale(0.8);
-    // image(happyIMG, width/2 - 50, height/2 - 50);
-  //   console.log("okk");
-  }
-
-  isHappy = true;
-  switchFrame = frameCount;
-  } else{
-    failSound.play();
-  }
-
-  
 }
+
+// function mousePressed() {
+//   if (mouseX >= width / 2 - 50 && mouseX <= width / 2 + 50 &&
+//     mouseY >= height / 2 - 50 && mouseY <= height / 2 + 50) {
+//     clickSound.play();
+//     let changedCount = 0;
+//     let randomHearts = []; 
+  
+//   for (let i = 0; i < hearts.length; i++) {
+//     if (hearts[i].symbol === "♡") {
+//       randomHearts.push(hearts[i]);
+//     }
+//   }
+  
+//   while (changedCount < 100 && randomHearts.length > 0) {
+//     let randHeart = randomHearts[int(random(randomHearts.length))]; 
+//     randHeart.symbol = heartSymbols[int(random(heartSymbols.length))];  
+//     changedCount++;
+//   }
+//   clickCount++;
+
+//   if(clickCount >= 8){
+
+//     window.location.href="../GamePage";
+
+//     // isHappy = true;
+//     // scale(0.8);
+//     // image(happyIMG, width/2 - 50, height/2 - 50);
+//   //   console.log("okk");
+//   }
+
+//   isHappy = true;
+//   switchFrame = frameCount;
+//   } else{
+//     failSound.play();
+//   }
+
+  
+//}
